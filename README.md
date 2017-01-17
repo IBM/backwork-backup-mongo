@@ -9,7 +9,7 @@ installed.
 If you already have the `mongod` server or `mongo` client installed then you 
 should have `mongodump`. If not, you can install them using the 
 [official packages](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#packages)
-or build by [source](https://github.com/mongodb/mongo-tools).
+or build from [source](https://github.com/mongodb/mongo-tools).
 
 ## Installing
 You can use `pip` to install this plug-in directly from GHE:
@@ -18,7 +18,7 @@ pip install git+ssh://git@github.ibm.com/apset/monsoon-backup-mongo
 ```
 
 ## Using
-After inslling the plug-in you will be able to use the `backup mongo` command
+After installing the plug-in you will be able to use the `backup mongo` command
 on `monsoon`.
 
 ```sh
@@ -32,4 +32,4 @@ monsoon backup mongo --user=user --password=pass --host=mongo
 ```
 
 The only exception is `-h` which is reserved for the help/usage message, so the
-host need to be passed as `--host`.
+host needs to be passed as `--host`.
