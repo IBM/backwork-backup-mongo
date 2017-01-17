@@ -4,8 +4,6 @@ import logging
 import os
 import subprocess
 
-from monsoon import BackupBase
-
 log = logging.getLogger(__name__)
 
 class MongoBackup(object):
