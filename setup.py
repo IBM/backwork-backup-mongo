@@ -30,7 +30,7 @@ setup(
     ],
     packages=find_packages(),
     install_requires=[
-        "git+ssh://git@github.ibm.com/apset/monsoon"
+        "monsoon"
     ],
     entry_points={
         "monsoon.backups": [
