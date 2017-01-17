@@ -29,7 +29,9 @@ setup(
         "Topic :: Utilities"
     ],
     packages=find_packages(),
-    install_requires=["monsoon"],
+    install_requires=[
+        "git+ssh://git@github.ibm.com/apset/monsoon"
+    ],
     entry_points={
         "monsoon.backups": [
             "mongo=mongo:MongoBackup"
