@@ -1,0 +1,22 @@
+sudo: false
+language: python
+python:
+- '2.7'
+- '3.6'
+install:
+- pip install -r requirements.txt
+script:
+- pylint monsoon setup.py
+deploy:
+  provider: pypi
+  user: leonsp@ca.ibm.com
+  password:
+    secure: 0QWok+FqmPnaJU1B/3eid4IdI2uvpClm3X3BsyfclUuuAU2OQvti9NvLe1Wb63RtfY9BWhrIK9c8OuZCqLoGSy7Ftju2TdPh7bEaRw1DDAT+5+L89u5b1ynBz+pxYQo8GPzFtEai0Vx9YQ1u809d9oSqGioD/tHeE4Wmc60vqjpQoSix0aM9NTq+H8LrP/DhgmWgT0j6tP8oW/sgMqsFexVAuquT2J1GS1xL2KG6yPWnfTBiDne/40wsdhjUTpJo5WMpkJRjNO/HeDJPRJibAVYQray8Go66nJBcjN/lJdEz1X0He8tl2j8VP3yo1iFZ0PSMuotio4Xafg2Y0OZ0rvAlSq0dyqw2zYC5rW6TksNJ0gSoyjVynMyPpKCaaiMtWZ+zKbBKMEqnE/O0wPRLtfXQUwNds/aUK+/B2UHQDRkFOpn7e8aY3LNZXTdhzyBSaNthUIbaxC8+UH5+wRCuRoippy9u7Ka0dUimT+OTPAquXthaLR/7pZBlOVgHo6OO8kMruTwinHKedISepV6M2oeAjHHOthC6uGuEdKIEtaXpHY0aCU0KIoYUKpDgwwydtCJTDfQHOMomBOvgWZZQSyz37jig5AugSbg/1HDPfxs4tUyF6LvtzHB7z8pf4tYrD+FAhJls3Ni/IxJmovw8ZCF8wOkDbJ2vegIkb6i/xCg=
+  server: https://na.artifactory.swg-devops.com/artifactory/api/pypi/apset-pypi-local
+  on:
+    python: '2.7'
+    repo: apset/monsoon-backup-mongo
+    tags: true
+notifications:
+  slack:
+    secure: EvcFxI8CddcjTjRPQYlh4SSyedYV55RRRyFBfuT9bpb0WRdmsOfsdyzCyJ2LjcqKlJ9IJIXd2oS9RQniSLgoc77KRyFhyX3ZnYr/v+d2Dk/IVWF7gDyMZ1UaYMhmnyXgX3SrUnu3uL5ID3KjsfQh5C7fATlj+M6k1qBLrpSJ8Q2rSkDEGOdtLKNAPp/eamXXizZcNUXmLXqqKhtOB8hvAtzVaXNxypfSkYQu9YpqS8GWwnK9EWgjMw0axPJ80iE9wlXDcOax5DdROfhbz9E8NZjaCSjadqPij3OebINI0ToRYlCvtjOQ32nx3av1rJV5rZ33/vn2Uq15RBOW/dkTI4ilQ+6ymlKVuDs+PsLzpYXmkT2XZJo+KXENUc+1MYxhpewmtio/KpV/1ecbtpzWFeFM/beLmrASePoKOgiNvH66b+ifSP4sQsFBZMhccF5px6+kiW3i8A1jY3mEyO9Ubh0jRl4bRdhaMqS5CqM5B7Vs86xiWoZqF+XEE4CPTT5oKTWptLEdXKTkJHkOLHohjjYKu2YT41Bm7jIng3CXD2Ej26bg65VHs78v/g/z5qimxrBgW1VgbUST+PpCyjb2CPNoAU++QgdstHX8Z4usPi2PpvP/zm+hGH4yCIDKvbSapGyC/aemlNQm2v7Pe+qNNFpqv/eVAn9YBS2kmMeNfA=B0imf80sSJWy

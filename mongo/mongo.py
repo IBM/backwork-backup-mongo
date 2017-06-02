@@ -1,10 +1,13 @@
+"""Add support for MongoDB backups on monsoon.
+"""
+
 import argparse
 import time
 import logging
 import os
 import subprocess
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 class MongoBackup(object):
     """Backup a MongoDB database.
@@ -18,11 +21,12 @@ class MongoBackup(object):
     def __init__(self, args, extra):
         self.args = args
         self.extra = extra
+        self.result = ""
 
     @classmethod
     def parse_args(cls, subparsers):
         """Create the `mongo` subparser for the `backup` command."""
-        mongo_parser = subparsers.add_parser(cls.command, description=cls.__doc__)
+        subparsers.add_parser(cls.command, description=cls.__doc__)
 
     def backup(self):
         """Backup a MongoDB database.
@@ -31,7 +35,7 @@ class MongoBackup(object):
         run `mongodump` with `--archive` and `--gzip` and store it into
         `./dumps` with a timestamped name.
         """
-        log.info("starting mongo backup...")
+        LOG.info("starting mongo backup...")
 
         # parse extra arguments to check output options
         output_config_parser = argparse.ArgumentParser()
@@ -52,19 +56,19 @@ class MongoBackup(object):
             if "--gzip" not in self.extra:
                 self.extra.append("--gzip")
 
-            log.info("saving file to %s", path)
+            LOG.info("saving file to %s", path)
 
         cmd = ["mongodump"] + self.extra
 
         try:
             self.result = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
-            log.info("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
-            log.info("backup complete")
+            LOG.info("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
+            LOG.info("backup complete")
 
-        except subprocess.CalledProcessError as e:
-            self.result = e.output
-            log.error("failed to back up mongo database")
-            log.error("return code was %s", e.returncode)
-            log.error("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
-            log.error("backup process failed")
-            raise e
+        except subprocess.CalledProcessError as error:
+            self.result = error.output
+            LOG.error("failed to back up mongo database")
+            LOG.error("return code was %s", error.returncode)
+            LOG.error("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
+            LOG.error("backup process failed")
+            raise error

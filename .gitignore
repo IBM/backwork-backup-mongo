@@ -1,2 +1,11 @@
 .DS_Store
+venv
 *.pyc
+monsoon-cli-0.1.4.tar.gz
+*.whl
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.idea/
