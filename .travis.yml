@@ -6,7 +6,7 @@ python:
 install:
 - pip install -r requirements.txt
 script:
-- pylint monsoon setup.py
+- pylint mongo setup.py
 deploy:
   provider: pypi
   user: leonsp@ca.ibm.com
