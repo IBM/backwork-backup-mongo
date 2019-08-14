@@ -1,0 +1,16 @@
+language: python
+python: '3.6'
+cache:
+  pip: true
+install:
+- pip install .
+script:
+- echo "no tests implemented"
+deploy:
+  - provider: pypi
+    user: __token__
+    password:
+      secure: wEjScxXih/noI33iwO672yXlLCQNKe4SoFUuNae63kY2FNsShQeBPV0GP875ySPRmfECyeArtl5JTW++G/sRKo990yvWiibwkGpWFvmPNY3tRi9esDeCmRKXCrYuo1x/YjgL3r/klZlqKGZMRwhRyKwuz2tNwsuiGYu2WSSRsyGHK5u3ZIAsQyy1B/EqeDJYtgRBJNqPVvz7MREdgmZH3l1WTJQ/iS7E1n2jc5mmRFAdaIbHK4WUhl0jPsH5KrPFIAy4eWSobNbyiMt3LNnlq4YQo36vTGKYjg14PiC0mfqaD48S2rYU1WhXsq6TLUvRMuU+bJJPhmcd/EjQZZnEq7S8/ZBXhs2SeLaI6G3mlP6VjLi7jef/EAfOjUXNpq2s7gn42ReNM9TY3HWkCUtl9TQI9Gkz3b9qpkgpZJoQE94GB20wVzCVL8hlJleHRpZOAa1iOpXM2F++7RkDOidm3CzWuBIIy0GYW8t4+E8Nl1s4FSTnGhFiFu2bm1SiKDAlm5ucchoatQX09ycahr7wKIKdYxS5BKfC1bx2Fcu7W/zH9/3Fh7Lptm/vtk6uhdwDL5n0iV1fZEOzaXqgSnbmjN3EnRpsjkt4SIlPPIpDi8EqLmuqbryTgE0MU2U9/LbD7XnpaDM5vwK9fPuumt7gE+afGIGeOeWAwsU0UW+YN5E=
+    on:
+      tags: true
+      repo: IBM/backwork-backup-mongo
