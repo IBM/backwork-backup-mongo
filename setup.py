@@ -35,7 +35,7 @@ setup(
     ],
     packages=find_packages(),
     install_requires=[
-        "monsoon-cli"
+        "backwork"
     ],
     entry_points={
         "monsoon.backups": [
