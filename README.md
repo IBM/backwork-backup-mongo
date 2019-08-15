@@ -1,4 +1,4 @@
-# backwork-backup-mongo
+# backwork-backup-mongo [![Build Status](https://travis-ci.org/IBM/backwork-backup-mongo.svg?branch=master)](https://travis-ci.org/IBM/backwork-backup-mongo) [![PyPI version](https://badge.fury.io/py/backwork-backup-mongo.svg)](https://badge.fury.io/py/backwork-backup-mongo)
 Adds support for MongoDB backups to [`backwork`](https://github.com/IBM/backwork).
 
 ## Requirements
