@@ -40,6 +40,9 @@ setup(
     entry_points={
         "backwork.backups": [
             "mongo=mongo:MongoBackup"
+        ],
+        "backwork.restores": [
+            "mongo=mongo:MongoRestore"
         ]
     }
 )

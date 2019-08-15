@@ -65,13 +65,55 @@ class MongoBackup(object):
         try:
             self.result = subprocess.check_output(
                 cmd, stderr=subprocess.STDOUT)
-            LOG.info("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
+            LOG.info('\n\n'+self.result.decode('utf-8'))
             LOG.info("backup complete")
 
         except subprocess.CalledProcessError as error:
             self.result = error.output
             LOG.error("failed to back up mongo database")
             LOG.error("return code was %s", error.returncode)
-            LOG.error("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
+            LOG.error('\n\n'+self.result.decode('utf-8'))
             LOG.error("backup process failed")
+            raise error
+
+
+class MongoRestore(object):
+    """Restore a MongoDB database.
+
+    It uses `mongorestore` so it's required to have it installed and added to the
+    system's PATH. You can use any of the arguments supported by `mongorestore`.
+    Use `mongorestore -h` for more information.
+    """
+    command = "mongo"
+
+    def __init__(self, args, extra):
+        self.args = args
+        self.extra = extra
+        self.result = ""
+
+    @classmethod
+    def parse_args(cls, subparsers):
+        """Create the `mongo` subparser for the `backup` command."""
+        subparsers.add_parser(cls.command, description=cls.__doc__)
+
+    def restore(self):
+        """Restore a MongoDB database.
+
+        """
+        LOG.info("starting mongo restore...")
+
+        cmd = ["mongorestore"] + self.extra
+
+        try:
+            self.result = subprocess.check_output(
+                cmd, stderr=subprocess.STDOUT)
+            LOG.info('\n\n'+self.result.decode('utf-8'))
+            LOG.info("restore complete")
+
+        except subprocess.CalledProcessError as error:
+            self.result = error.output
+            LOG.error("failed to restore mongo database")
+            LOG.error("return code was %s", error.returncode)
+            LOG.error('\n\n'+self.result.decode('utf-8'))
+            LOG.error("restore process failed")
             raise error
