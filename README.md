@@ -1,29 +1,29 @@
-# monsoon-backup-mongo
-Add support for MongoDB backups on [`monsoon`](https://github.ibm.com/apset/monsoon).
+# backwork-backup-mongo
+Adds support for MongoDB backups to [`backwork`](https://github.com/IBM/backwork).
 
 ## Requirements
 This plug-in is build on top of [`mongodump`](https://docs.mongodb.com/manual/reference/program/mongodump/#bin.mongodump),
 so you will need to have [`mongo-tools`](https://github.com/mongodb/mongo-tools)
-installed. 
+installed.
 
-If you already have the `mongod` server or `mongo` client installed then you 
-should have `mongodump`. If not, you can install them using the 
+If you already have the `mongod` server or `mongo` client installed then you
+should have `mongodump`. If not, you can install them using the
 [official packages](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#packages)
 or build from [source](https://github.com/mongodb/mongo-tools).
 
 ## Installing
-You can use `pip` to install this plug-in directly from GHE:
+You can use `pip` to install this plug-in:
 ```sh
-$ pip install git+ssh://git@github.ibm.com/apset/monsoon-backup-mongo
+$ pip install backwork-backup-mongo
 ```
 
 ## Using
 After installing the plug-in you will be able to use the `backup mongo` command
-on `monsoon`.
+on `backwork`.
 
 ```sh
-$ monsoon backup mongo --help
-usage: monsoon backup mongo [-h]
+$ backwork backup mongo --help
+usage: backwork backup mongo [-h]
 
 Backup a MongoDB database. It uses `mongodump` so it's required to have it
 installed and added to the system's PATH. You can use any of the arguments
@@ -34,7 +34,7 @@ optional arguments:
 ```
 
 ```sh
-$ monsoon backup mongo
+$ backwork backup mongo
 2017-01-17 01:26:27,420 mongo.mongo INFO    starting mongo backup...
 2017-01-17 01:26:27,421 mongo.mongo INFO    saving file to /dumps/mongo_backup_20170117-012627.archive.gz
 2017-01-17 01:26:27,483 mongo.mongo INFO    output:
@@ -48,7 +48,7 @@ $ monsoon backup mongo
 You can pass any option that you would normally use on `mongodump`:
 
 ```sh
-$ monsoon backup mongo --user=user --password=pass --host=mongo
+$ backwork backup mongo --user=user --password=pass --host=mongo
 ```
 
 The only exception is `-h` which is reserved for the help/usage message, so the

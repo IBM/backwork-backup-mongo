@@ -1,4 +1,4 @@
-"""Add support for MongoDB backups on monsoon.
+"""Add support for MongoDB backups on backwork.
 """
 
 from os import path
@@ -38,7 +38,7 @@ setup(
         "backwork"
     ],
     entry_points={
-        "monsoon.backups": [
+        "backwork.backups": [
             "mongo=mongo:MongoBackup"
         ]
     }

@@ -1,4 +1,4 @@
-"""Add support for MongoDB backups on monsoon.
+"""Add support for MongoDB backups on backwork.
 """
 
 import argparse
@@ -8,6 +8,7 @@ import os
 import subprocess
 
 LOG = logging.getLogger(__name__)
+
 
 class MongoBackup(object):
     """Backup a MongoDB database.
@@ -45,7 +46,8 @@ class MongoBackup(object):
 
         if not any([output_args.output, output_args.archive]):
             # generate sensible defaults for output file: timestamped gziped archived file
-            filename = "mongo_backup_{}.archive.gz".format(time.strftime("%Y%m%d-%H%M%S"))
+            filename = "mongo_backup_{}.archive.gz".format(
+                time.strftime("%Y%m%d-%H%M%S"))
             path = os.path.join(os.getcwd(), "dumps", filename)
             dirname = os.path.dirname(path)
 
@@ -61,7 +63,8 @@ class MongoBackup(object):
         cmd = ["mongodump"] + self.extra
 
         try:
-            self.result = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+            self.result = subprocess.check_output(
+                cmd, stderr=subprocess.STDOUT)
             LOG.info("output:\n\n\t%s", "\n\t".join(self.result.split("\n")))
             LOG.info("backup complete")
 
