@@ -15,7 +15,7 @@ class MongoBackup(object):
 
     It uses `mongodump` so it's required to have it installed and added to the
     system's PATH. You can use any of the arguments supported by `mongodump`.
-    Use `mongodump -h` for more information.
+    Use `mongodump --help` for more information.
     """
     command = "mongo"
 
@@ -80,9 +80,9 @@ class MongoBackup(object):
 class MongoRestore(object):
     """Restore a MongoDB database.
 
-    It uses `mongorestore` so it's required to have it installed and added to the
-    system's PATH. You can use any of the arguments supported by `mongorestore`.
-    Use `mongorestore -h` for more information.
+    Restore a MongoDB database. It uses `mongorestore` so it's required to have it
+    installed and added to the system's PATH. You can use any of the arguments
+    supported by `mongorestore`. Use `mongorestore --help` for more information.
     """
     command = "mongo"
 

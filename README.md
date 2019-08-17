@@ -18,37 +18,52 @@ $ pip install backwork-backup-mongo
 ```
 
 ## Using
-After installing the plug-in you will be able to use the `backup mongo` command
+After installing the plug-in you will be able to use the `backup mongo` and `restore mongo` commands
 on `backwork`.
 
+
+#### `backwork backup mongo`
 ```sh
 $ backwork backup mongo --help
 usage: backwork backup mongo [-h]
 
 Backup a MongoDB database. It uses `mongodump` so it's required to have it
 installed and added to the system's PATH. You can use any of the arguments
-supported by `mongodump`. Use `mongodump -h` for more information.
+supported by `mongodump`. Use `mongodump --help` for more information.
 
 optional arguments:
   -h, --help  show this help message and exit
 ```
 
-```sh
-$ backwork backup mongo
-2017-01-17 01:26:27,420 mongo.mongo INFO    starting mongo backup...
-2017-01-17 01:26:27,421 mongo.mongo INFO    saving file to /dumps/mongo_backup_20170117-012627.archive.gz
-2017-01-17 01:26:27,483 mongo.mongo INFO    output:
-
-	2017-01-17T01:26:27.479-0500	writing app.products to archive '/dumps/mongo_backup_20170117-012627.archive.gz'
-	2017-01-17T01:26:27.480-0500	done dumping app.products (1 document)
-
-2017-01-17 01:26:27,483 mongo.mongo INFO    backup complete
-```
-
-You can pass any option that you would normally use on `mongodump`:
+You can pass any option that you would normally use on `mongodump`, e.g.:
 
 ```sh
 $ backwork backup mongo --user=user --password=pass --host=mongo
+```
+
+The only exception is `-h` which is reserved for the help/usage message, so the
+host needs to be passed as `--host`.
+
+
+
+#### `backwork restore mongo`
+
+```sh
+$ backwork restore mongo --help
+usage: backwork restore mongo [-h]
+
+Restore a MongoDB database. It uses `mongorestore` so it's required to have it
+installed and added to the system's PATH. You can use any of the arguments
+supported by `mongorestore`. Use `mongorestore --help` for more information.
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+You can pass any option that you would normally use on `mongorestore`, e.g.:
+
+```sh
+$ backwork restore mongo --user=user --password=pass --host=mongo dumps
 ```
 
 The only exception is `-h` which is reserved for the help/usage message, so the
