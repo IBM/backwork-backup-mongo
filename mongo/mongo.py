@@ -42,11 +42,13 @@ class MongoBackup(object):
         """
         LOG.info("starting mongo backup...")
 
-        mongo_uri = [uri for uri in self.extra if "--uri" in uri]
+    
+        mongo_uri = [uri for uri in self.extra if "--uri=" in uri]
         if(len(mongo_uri) > 0):
-            original_mongo_uri = mongo_uri[0]
-            mongo_uri_password = re.search(r"//([^:]+):(.*)@", mongo_uri[0]).group(2)
-            mongo_uri_username = re.search(r"//([^:]+):(.*)@", mongo_uri[0]).group(1)
+            original_mongo_uri = mongo_uri[0].replace("--uri=", "")
+            original_mongo_uri_parsed = urlparse(original_mongo_uri)
+            mongo_uri_password = original_mongo_uri_parsed.password 
+            mongo_uri_username = original_mongo_uri_parsed.username
             mongo_uri_password_encoded = urllib.parse.quote(mongo_uri_password)
             mongo_uri_username_encoded = urllib.parse.quote(mongo_uri_username)
             original_mongo_uri = original_mongo_uri.replace(mongo_uri_password, mongo_uri_password_encoded)
