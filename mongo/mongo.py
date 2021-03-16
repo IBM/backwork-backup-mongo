@@ -6,6 +6,8 @@ import time
 import logging
 import os
 import subprocess
+import urllib
+from urllib.parse import urlparse, quote
 
 LOG = logging.getLogger(__name__)
 
@@ -27,6 +29,7 @@ class MongoBackup(object):
     @classmethod
     def parse_args(cls, subparsers):
         """Create the `mongo` subparser for the `backup` command."""
+        LOG.info(subparsers)
         subparsers.add_parser(cls.command, description=cls.__doc__)
 
     def backup(self):
@@ -37,6 +40,18 @@ class MongoBackup(object):
         `./dumps` with a timestamped name.
         """
         LOG.info("starting mongo backup...")
+
+        mongo_uri = [uri for uri in self.extra if "--uri=" in uri]
+        if(len(mongo_uri) > 0):
+            original_mongo_uri = mongo_uri[0].replace("--uri=", "")
+            original_mongo_uri_parsed = urlparse(original_mongo_uri)
+            mongo_uri_password = original_mongo_uri_parsed.password 
+            mongo_uri_username = original_mongo_uri_parsed.username
+            mongo_uri_password_encoded = urllib.parse.quote(mongo_uri_password)
+            mongo_uri_username_encoded = urllib.parse.quote(mongo_uri_username)
+            original_mongo_uri = original_mongo_uri.replace(mongo_uri_password, mongo_uri_password_encoded)
+            original_mongo_uri = original_mongo_uri.replace(mongo_uri_username, mongo_uri_username_encoded)
+            self.extra = [original_mongo_uri]
 
         # parse extra arguments to check output options
         output_config_parser = argparse.ArgumentParser()
