@@ -50,7 +50,7 @@ class MongoBackup(object):
             if(mongo_uri_password and mongo_uri_username):
                 mongo_uri_password_decoded = urllib.parse.unquote(mongo_uri_password)
                 mongo_uri_username_decoded = urllib.parse.unquote(mongo_uri_username)
-                if((mongo_uri_password and mongo_uri_username) and (mongo_uri_password_decoded == mongo_uri_password and mongo_uri_username_decoded == mongo_uri_username)):
+                if(mongo_uri_password_decoded == mongo_uri_password and mongo_uri_username_decoded == mongo_uri_username):
                     mongo_uri_password_encoded = urllib.parse.quote(mongo_uri_password)
                     mongo_uri_username_encoded = urllib.parse.quote(mongo_uri_username)
                     original_mongo_uri = original_mongo_uri.replace(mongo_uri_password, mongo_uri_password_encoded)
