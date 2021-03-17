@@ -29,7 +29,6 @@ class MongoBackup(object):
     @classmethod
     def parse_args(cls, subparsers):
         """Create the `mongo` subparser for the `backup` command."""
-        LOG.info(subparsers)
         subparsers.add_parser(cls.command, description=cls.__doc__)
 
     def backup(self):
@@ -49,10 +48,11 @@ class MongoBackup(object):
             if(original_mongo_uri_parsed.password is not None or original_mongo_uri_parsed.password is not None):
                 mongo_uri_password = original_mongo_uri_parsed.password 
                 mongo_uri_username = original_mongo_uri_parsed.username
-                mongo_uri_password_encoded = urllib.parse.quote(mongo_uri_password)
-                mongo_uri_username_encoded = urllib.parse.quote(mongo_uri_username)
-                original_mongo_uri = original_mongo_uri.replace(mongo_uri_password, mongo_uri_password_encoded)
-                original_mongo_uri = original_mongo_uri.replace(mongo_uri_username, mongo_uri_username_encoded)
+                if(urllib.parse.unquote(mongo_uri_password) == mongo_uri_password and urllib.parse.unquote(mongo_uri_username) == mongo_uri_username):
+                    mongo_uri_password_encoded = urllib.parse.quote(mongo_uri_password)
+                    mongo_uri_username_encoded = urllib.parse.quote(mongo_uri_username)
+                    original_mongo_uri = original_mongo_uri.replace(mongo_uri_password, mongo_uri_password_encoded)
+                    original_mongo_uri = original_mongo_uri.replace(mongo_uri_username, mongo_uri_username_encoded)
             self.extra = [original_mongo_uri]
 
         # parse extra arguments to check output options
