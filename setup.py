@@ -12,7 +12,7 @@ with open(path.join(HERE, 'README.md')) as f:
 
 setup(
     name="backwork-backup-mongo",
-    version="0.1.2",
+    version="0.3.1",
     description="Backwork plug-in for MongoDB backups.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.1][] - 2021-03-23
+### Fixed
+- Authentication with special characters is fixed.
 ## [0.3.0][] - 2019-08-17
 ### Added
 - Added `restore` subcommand.
